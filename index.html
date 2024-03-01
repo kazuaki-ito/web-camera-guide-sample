@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camera Preview</title>
+    <style>
+    .camera-preview {
+        position: absolute;
+        top: 0px;
+        left: 00px;
+        width: 640px;
+        height: 480px;
+    }
+
+    .guide {
+        position: absolute;
+        top: 150px;
+        left: 220px;
+        width: 200px;
+    }
+    </style>
+</head>
+<body>
+    <div></div>
+    <video id="video" width="640" height="480" autoplay class="camera-preview"></video>
+    <div class="guide">
+        <img src="./guide.svg"/>
+    </div>
+    
+    <script>
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(function(stream) {
+                var video = document.getElementById('video');
+                video.srcObject = stream;
+                video.play();
+            })
+            .catch(function(err) {
+                console.log("カメラにアクセスできません: " + err);
+            });
+    </script>
+</body>
+</html>
